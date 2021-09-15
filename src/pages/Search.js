@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import MusicCard from '../components/MusicCard';
+import MusicCards from '../components/MusicCards';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from './Loading';
 
@@ -38,7 +38,7 @@ export default class Search extends Component {
   }
 
   handleAlbumMap(search) {
-    return search.map((album) => <MusicCard { ...album } key={ album.trackId } />);
+    return search.map((album) => <MusicCards { ...album } key={ album.trackId } />);
   }
 
   handleStateCondition = ({ loadAPI, searchAlbuns, load, artistName }) => {
