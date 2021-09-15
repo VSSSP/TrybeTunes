@@ -34,7 +34,6 @@ export default class Album extends Component {
       );
     }
     const { musics } = this.state;
-    console.log(musics);
     return (
       <div data-testid="page-album">
         <Header />
@@ -43,8 +42,7 @@ export default class Album extends Component {
           <p data-testid="album-name">{ musics[0].collectionName }</p>
           { musics.slice(1).map((music) => (<MusicCard
             key={ music.collectionId }
-            trackName={ music.trackName }
-            previewUrl={ music.previewUrl }
+            music={ music }
           />)) }
         </section>
       </div>

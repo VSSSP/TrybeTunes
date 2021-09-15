@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default class MusicCard extends Component {
+export default class MusicCards extends Component {
   render() {
     const { artworkUrl100, collectionName, artistName, collectionId } = this.props;
     return (
@@ -25,7 +25,7 @@ export default class MusicCard extends Component {
   }
 }
 
-MusicCard.propTypes = {
+MusicCards.propTypes = {
   artworkUrl100: PropTypes.string.isRequired,
   collectionName: PropTypes.string.isRequired,
   artistName: PropTypes.string.isRequired,
