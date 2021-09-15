@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import MusicCard from '../components/MusicCard';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from './Loading';
 
@@ -8,7 +8,6 @@ export default class Search extends Component {
   constructor() {
     super();
     this.state = {
-      disabled: true,
       searchInput: '',
       load: false,
       searchAlbuns: {},
@@ -18,91 +17,74 @@ export default class Search extends Component {
 
   handleChange = ({ target }) => {
     const { name, value } = target;
-    const MIN_LENGTH = 2;
-    if (value.length >= MIN_LENGTH) {
-      this.setState({
-        disabled: false,
-        [name]: value,
-      });
-    } else {
-      this.setState({
-        disabled: true,
-      });
-    }
+    this.setState({
+      [name]: value,
+    });
   }
 
   handleClick = async () => {
+    const { searchInput } = this.state;
     this.setState({
       load: true,
+      artistName: searchInput,
     });
-    const { searchInput } = this.state;
     const AlbunsAPI = await searchAlbumsAPI(searchInput);
     this.setState({
       searchAlbuns: AlbunsAPI,
       loadAPI: true,
       load: false,
+      searchInput: '',
     });
   }
 
-  render() {
-    const { disabled, searchAlbuns, load, loadAPI, searchInput } = this.state;
+  handleAlbumMap(search) {
+    return search.map((album) => <MusicCard { ...album } key={ album.trackId } />);
+  }
+
+  handleStateCondition = ({ loadAPI, searchAlbuns, load, artistName }) => {
     if (load) {
-      console.log('carregando');
       return (
         <Loading />
       );
     }
+    if (loadAPI && searchAlbuns.length === 0) {
+      return <p>Nenhum álbum foi encontrado</p>;
+    }
     if (loadAPI) {
-      console.log('carregado');
       return (
-        <>
-          <Header />
+        <div key="a">
           <p>
-            {`Exibindo resultados de
-          ${searchInput}`}
+            {`Resultado de álbuns de: ${artistName}`}
           </p>
-          <ul>
-            { searchAlbuns.map((album) => {
-              const { collectionId, collectionName, artworkUrl100, artistName } = album;
-              return (
-                <li key={ artworkUrl100 }>
-                  <img
-                    width="150px"
-                    src={ artworkUrl100 }
-                    alt={ `${collectionName} de ${artistName}` }
-                  />
-                  <Link
-                    to={ `/album/${collectionId}` }
-                    data-testid={ `link-to-album-${collectionId}` }
-                  >
-                    { collectionName }
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </>
+          { this.handleAlbumMap(searchAlbuns) }
+        </div>
       );
     }
+  }
 
+  render() {
+    const { searchInput } = this.state;
+    const MIN_LENGTH = 2;
     return (
       <div data-testid="page-search">
         <Header />
-        <label htmlFor="name">
+        <label htmlFor="searchInput">
           <input
             name="searchInput"
             data-testid="search-artist-input"
             onChange={ this.handleChange }
+            value={ searchInput }
           />
           <button
             data-testid="search-artist-button"
             type="button"
-            disabled={ disabled }
+            disabled={ searchInput.length < MIN_LENGTH }
             onClick={ this.handleClick }
           >
             Pesquisar
           </button>
         </label>
+        { this.handleStateCondition(this.state) }
       </div>
     );
   }

@@ -8,8 +8,9 @@ export default class Login extends Component {
     super();
 
     this.state = {
-      disabled: true,
-      criarUsuario: {},
+      criarUsuario: {
+        name: '',
+      },
       load: false,
       redirect: false,
     };
@@ -17,20 +18,12 @@ export default class Login extends Component {
   }
 
   handleChange = ({ target }) => {
-    const { value } = target;
-    const MIN_LENGTH = 3;
-    if (value.length >= MIN_LENGTH) {
-      this.setState({
-        disabled: false,
-        criarUsuario: {
-          name: value,
-        },
-      });
-    } else {
-      this.setState({
-        disabled: true,
-      });
-    }
+    const { name, value } = target;
+    this.setState({
+      criarUsuario: {
+        [name]: value,
+      },
+    });
   };
 
    handleClick = async () => {
@@ -47,7 +40,8 @@ export default class Login extends Component {
    }
 
    render() {
-     const { disabled, redirect, load } = this.state;
+     const { redirect, load, criarUsuario } = this.state;
+     const MIN_LENGTH = 3;
      if (load) {
        return <Loading />;
      }
@@ -58,16 +52,16 @@ export default class Login extends Component {
      return (
        <div data-testid="page-login">
          <form>
-           <label htmlFor="login">
+           <label htmlFor="name">
              <input
-               name="login"
+               name="name"
                data-testid="login-name-input"
                onChange={ this.handleChange }
              />
              <button
                data-testid="login-submit-button"
                type="button"
-               disabled={ disabled }
+               disabled={ criarUsuario.name.length < MIN_LENGTH }
                onClick={ this.handleClick }
              >
                Entrar
