@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Loading from '../pages/Loading';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
 export default class MusicCard extends Component {
   constructor() {
@@ -8,30 +8,19 @@ export default class MusicCard extends Component {
 
     this.state = {
       load: false,
-      checkboxStatus: false,
+      favorites: false,
     };
   }
 
-  handleCheckBoxChange = async () => {
-    const { music } = this.props;
-    this.setState({
-      load: true,
-    });
-    await addSong(music);
-    this.setState({
-      load: false,
-      checkboxStatus: true,
-    });
+  handleCheckbox = async ({ target: { checked } }) => {
+    const { removeOrAddSongs, music: { trackId } } = this.props;
+    removeOrAddSongs(trackId, checked);
   }
 
-  // handleCheckboxClick = () => {
-
-  // }
-
   render() {
-    console.log(this.props);
     const { music: { trackName, previewUrl, trackId } } = this.props;
-    const { load, checkboxStatus } = this.state;
+    const { checked } = this.props;
+    const { load, favorites } = this.state;
 
     if (load) {
       return <Loading />;
@@ -52,8 +41,8 @@ export default class MusicCard extends Component {
             name="favorites"
             type="checkbox"
             data-testid={ `checkbox-music-${trackId}` }
-            onChange={ this.handleCheckBoxChange }
-            checked={ checkboxStatus }
+            onChange={ this.handleCheckbox }
+            checked={ checked }
           />
         </label>
       </div>
