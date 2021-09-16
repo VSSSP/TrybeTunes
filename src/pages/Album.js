@@ -25,7 +25,6 @@ export default class Album extends Component {
     const musics = await getMusics(id);
     this.setState({
       musics,
-      load: false,
     });
   }
 
@@ -33,7 +32,23 @@ export default class Album extends Component {
     const favorites = await getFavoriteSongs();
     this.setState({
       favorites,
+      load: false,
     });
+  }
+
+  handleSection({ musics, favorites }) {
+    return (
+      <section>
+        <p data-testid="artist-name">{ musics[0].artistName }</p>
+        <p data-testid="album-name">{ musics[0].collectionName }</p>
+        { musics.slice(1).map((music) => (<MusicCard
+          checked={ favorites.some((favorite) => music.trackId === favorite.trackId) }
+          key={ music.collectionId }
+          music={ music }
+          removeOrAddSongs={ this.removeOrAddSongs }
+        />)) }
+      </section>
+    );
   }
 
   removeOrAddSongs = async (id, checkbox) => {
@@ -42,32 +57,15 @@ export default class Album extends Component {
     });
     await (checkbox ? addSong(id) : removeSong(id));
     this.handleFavoriteSongs();
-    this.setState({
-      load: false,
-    });
   }
 
   render() {
     const { load } = this.state;
-    if (load) {
-      return (
-        <Loading />
-      );
-    }
-    const { musics, favorites } = this.state;
+
     return (
       <div data-testid="page-album">
         <Header />
-        <section>
-          <p data-testid="artist-name">{ musics[0].artistName }</p>
-          <p data-testid="album-name">{ musics[0].collectionName }</p>
-          { musics.slice(1).map((music) => (<MusicCard
-            checked={ favorites.some((favorite) => music.trackId === favorite.trackId) }
-            key={ music.collectionId }
-            music={ music }
-            removeOrAddSongs={ this.removeOrAddSongs }
-          />)) }
-        </section>
+        { load ? <Loading /> : this.handleSection(this.state) }
       </div>
     );
   }
