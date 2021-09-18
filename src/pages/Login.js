@@ -14,7 +14,6 @@ export default class Login extends Component {
       load: false,
       redirect: false,
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange = ({ target }) => {
@@ -30,7 +29,6 @@ export default class Login extends Component {
      const { criarUsuario } = this.state;
      this.setState({
        load: true,
-       redirect: false,
      });
      await createUser(criarUsuario);
      this.setState({
@@ -42,12 +40,9 @@ export default class Login extends Component {
    render() {
      const { redirect, load, criarUsuario } = this.state;
      const MIN_LENGTH = 3;
-     if (load) {
-       return <Loading />;
-     }
-     if (redirect) {
-       return <Redirect to="/search" />;
-     }
+
+     if (load) return <Loading />;
+     if (redirect) return <Redirect to="/search" />;
 
      return (
        <div data-testid="page-login">

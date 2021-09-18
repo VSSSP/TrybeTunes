@@ -47,7 +47,7 @@ export default class Search extends Component {
         <Loading />
       );
     }
-    if (loadAPI && searchAlbuns.length === 0) {
+    if (loadAPI && !searchAlbuns.length) {
       return <p>Nenhum álbum foi encontrado</p>;
     }
     if (loadAPI) {
