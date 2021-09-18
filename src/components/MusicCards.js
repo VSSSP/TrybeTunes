@@ -14,7 +14,7 @@ export default class MusicCards extends Component {
             alt={ `${collectionName} de ${artistName}` }
           />
           <Link
-            to={ `/album/${collectionId}` }
+            to={ `/TrybeTunes/album/${collectionId}` }
             data-testid={ `link-to-album-${collectionId}` }
           >
             { collectionName }

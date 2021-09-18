@@ -36,9 +36,15 @@ export default class Header extends Component {
       <header data-testid="header-component">
         <h1>Trybetunes</h1>
         <p data-testid="header-user-name">{user.name}</p>
-        <Link to="/search" data-testid="link-to-search">Search</Link>
-        <Link to="/favorites" data-testid="link-to-favorites"> Favorites </Link>
-        <Link to="/profile" data-testid="link-to-profile"> Profile </Link>
+        <Link to="/TrybeTunes/search" data-testid="link-to-search">Search</Link>
+        <Link
+          to="/TrybeTunes/favorites"
+          data-testid="link-to-favorites"
+        >
+          Favorites
+          {' '}
+        </Link>
+        <Link to="/TrybeTunes/profile" data-testid="link-to-profile"> Profile </Link>
       </header>
     );
   }
