@@ -23,7 +23,6 @@ export default class Profile extends Component {
       load: true,
     });
     const user = await getUser();
-    console.log(user);
     this.setState({
       load: false,
       user,

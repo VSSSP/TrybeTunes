@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Loading from '../pages/Loading';
 
 export default class MusicCard extends Component {
@@ -49,3 +50,13 @@ export default class MusicCard extends Component {
     );
   }
 }
+
+MusicCard.propTypes = {
+  music: PropTypes.shape({
+    trackName: PropTypes.string,
+    previewUrl: PropTypes.string,
+    trackId: PropTypes.string,
+  }).isRequired,
+  removeOrAddSongs: PropTypes.func.isRequired,
+  checked: PropTypes.bool.isRequired,
+};
