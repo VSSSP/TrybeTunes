@@ -61,6 +61,7 @@ export default class Login extends Component {
                onChange={ this.handleChange }
              />
             </div>
+            <br />
              <button
                data-testid="login-submit-button"
                type="button"
