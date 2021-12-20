@@ -15,7 +15,6 @@ export default class Login extends Component {
       load: false,
       redirect: false,
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange = ({ target }) => {
@@ -52,9 +51,9 @@ export default class Login extends Component {
 
      return (
       <div className="background-login">
-      <div class="wrapper fadeInDown">
+      <div className="wrapper fadeInDown">
         <div id="formContent">
-      <div class="fadeIn first">
+      <div className="fadeIn first">
         <img src={logo} id="icon" alt="User Icon" />
       </div>
       <form>

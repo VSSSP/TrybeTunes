@@ -53,7 +53,7 @@ export default class Search extends Component {
     }
     if (loadAPI) {
       return (
-        <div key="a">
+        <div key="">
           <p className="album-results">
             {`Resultado de álbuns de: ${artistName}`}
           </p>
