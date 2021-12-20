@@ -39,15 +39,20 @@ export default class Album extends Component {
 
   handleSection({ musics, favorites }) {
     return (
-      <section>
-        <p data-testid="artist-name">{ musics[0].artistName }</p>
-        <p data-testid="album-name">{ musics[0].collectionName }</p>
-        { musics.slice(1).map((music) => (<MusicCard
-          checked={ favorites.some((favorite) => music.trackId === favorite.trackId) }
-          key={ music.collectionId }
-          music={ music }
-          removeOrAddSongs={ this.removeOrAddSongs }
-        />)) }
+      <section className="musics">
+        <div className="album-info">
+          <p data-testid="artist-name">{ musics[0].artistName }</p>
+          <p data-testid="album-name">{ musics[0].collectionName }</p>
+          <img className="album-image" src={ musics[0].artworkUrl100 } alt={ `${musics[0].collectionName} de ${musics[0].artistName}` } />
+        </div>
+        <div className="music-cards">
+          { musics.slice(1).map((music) => (<MusicCard
+            checked={ favorites.some((favorite) => music.trackId === favorite.trackId) }
+            key={ music.collectionId }
+            music={ music }
+            removeOrAddSongs={ this.removeOrAddSongs }
+          />)) }
+        </div>
       </section>
     );
   }

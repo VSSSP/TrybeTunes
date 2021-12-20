@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../pages/Loading';
 import { getUser } from '../services/userAPI';
+import logo from '../images/Logo.png';
+import { BsFillPersonFill, BsFillHeartFill, BsSearch } from "react-icons/bs";
 
 export default class Header extends Component {
   constructor() {
@@ -33,26 +35,31 @@ export default class Header extends Component {
       return <Loading />;
     }
     return (
-      <nav className="bg-blue-600">
-        <h1>Trybetunes</h1>
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="relative flex items-center justify-between h-16">
-            <div className="absolute inset-y-0 left-0 flex items-center">
-              <p className="text-gray-100 block px-3 py-2 rounded-md text-base font-medium" data-testid="header-user-name">Usuário: {user.name}</p>
-              <Link to="/TrybeTunes/search" data-testid="link-to-search" className="text-gray-100 hover:bg-blue-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Search</Link>
-              <Link
-                to="/TrybeTunes/favorites"
-                data-testid="link-to-favorites"
-                className="text-gray-100 hover:bg-blue-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                Favorites
-                {' '}
-              </Link>
-              <Link to="/TrybeTunes/profile" data-testid="link-to-profile" className="text-gray-100 hover:bg-blue-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Profile </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <>
+      <div className="head1-background">
+        <ul className="nav nav-tabs md-tabs nav-justified indigo" data-testid="header-component">
+          <li data-testid="header-user-name" className="nav-item header-user">
+            Usuário: {user.name}
+          </li>
+          <li data-testid="header-user-name" className="nav-item">
+            <img src={logo} alt="trybetunes" max-width={"10px"} className="header-icon"/>
+          </li>
+        </ul>
+      </div>
+      <div className="head2-background">
+        <ul className="nav nav-tabs md-tabs nav-justified" data-testid="header-component">
+          <li className="nav-item">
+            <Link to="/search" data-testid="link-to-search"><BsSearch /> Search</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/favorites" data-testid="link-to-favorites"><BsFillHeartFill /> Favorites </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/profile" data-testid="link-to-profile"><BsFillPersonFill /> Profile </Link>
+          </li>
+        </ul>
+      </div>
+      </>
     );
   }
 }

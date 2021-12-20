@@ -47,7 +47,7 @@ export default class Profile extends Component {
       <div data-testid="page-profile">
         <Header />
         { load ? <Loading /> : this.userProfile() }
-        <Link to="/TrybeTunes/profile/edit"> Editar perfil </Link>
+        <Link to="/profile/edit"> Editar perfil </Link>
       </div>
     );
   }

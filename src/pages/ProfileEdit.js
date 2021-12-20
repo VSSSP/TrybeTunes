@@ -117,7 +117,7 @@ export default class ProfileEdit extends Component {
 
   render() {
     const { load, redirect } = this.state;
-    if (redirect) return <Redirect to="/TrybeTunes/profile" />;
+    if (redirect) return <Redirect to="/profile" />;
     return (
       <div data-testid="page-profile-edit">
         <Header />

@@ -27,25 +27,28 @@ export default class MusicCard extends Component {
 
     return (
       <div>
-        { trackName }
-        <audio data-testid="audio-component" src={ previewUrl } controls>
-          <track kind="captions" />
-          O seu navegador não suporta o elemento
-          {' '}
-          <code>audio</code>
-          .
-        </audio>
-        <label htmlFor={ trackId }>
-          Favorita
-          <input
-            name="input"
-            id={ trackId }
-            type="checkbox"
-            data-testid={ `checkbox-music-${trackId}` }
-            onChange={ this.handleCheckbox }
-            checked={ checked }
-          />
-        </label>
+        <p className="music-name">{ trackName }</p>
+        <div className="player-label">
+          <audio className="music-card" data-testid="audio-component" src={ previewUrl } controls>
+            <track kind="captions" />
+            O seu navegador não suporta o elemento
+            {' '}
+            <code>audio</code>
+            .
+          </audio>
+          <label htmlFor={ trackId } className="label-fav">
+            Favoritar
+            <input
+              name="input"
+              id={ trackId }
+              type="checkbox"
+              data-testid={ `checkbox-music-${trackId}` }
+              onChange={ this.handleCheckbox }
+              checked={ checked }
+              className="checkbox-fav"
+            />
+          </label>
+        </div>
       </div>
     );
   }

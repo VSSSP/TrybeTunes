@@ -28,7 +28,7 @@ export default class Favorites extends Component {
 
   handleSection({ favorites }) {
     return (
-      <section>
+      <section className="fav-section">
         { favorites.map((music) => (<MusicCard
           checked={ favorites.some((favorite) => music.trackId === favorite.trackId) }
           key={ music.collectionId }
