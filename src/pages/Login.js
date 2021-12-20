@@ -58,7 +58,7 @@ export default class Login extends Component {
         <img src={logo} id="icon" alt="User Icon" />
       </div>
       <form>
-        <input onChange={ this.handleChange } name="name" type="text" id="login" class="fadeIn second" placeholder="Nome"/>
+        <input onChange={ this.handleChange } name="name" type="text" id="login" className="fadeIn second input-login" placeholder="Nome"/>
         <button disabled={ criarUsuario.name.length < MIN_LENGTH } onClick={ this.handleClick } type="button" className="fadeIn fourth btn-primary btn-login">Entrar</button>
       </form>
         </div>

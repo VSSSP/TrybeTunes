@@ -72,46 +72,54 @@ export default class ProfileEdit extends Component {
   editProfileForm() {
     const { user: { name, email, image, description } } = this.state;
     return (
-      <>
-        <input
-          data-testid="edit-input-name"
-          type="text"
-          value={ name }
-          name="name"
-          onChange={ this.handleChange }
-        />
-        <input
-          data-testid="edit-input-email"
-          type="text"
-          value={ email }
-          name="email"
-          onChange={ this.handleChange }
-        />
-        <input
-          data-testid="edit-input-description"
-          type="text"
-          value={ description }
-          name="description"
-          onChange={ this.handleChange }
-        />
-        <input
-          data-testid="edit-input-image"
-          type="text"
-          value={ image }
-          name="image"
-          onChange={ this.handleChange }
-        />
-        <button
-          data-testid="edit-button-save"
-          type="button"
-          disabled={ this.enableButton() }
-          onClick={ this.handleClick }
-        >
-          {' '}
-          Salvar
-          {' '}
-        </button>
-      </>
+      <div className="profile-edit-box">
+        <div className="profile-edit">
+          <p className="edit-inputs">Editar nome:</p>
+          <input
+            data-testid="edit-input-name"
+            type="text"
+            value={ name }
+            name="name"
+            onChange={ this.handleChange }
+          />
+          <p className="edit-inputs">Editar e-mail:</p>
+          <input
+            data-testid="edit-input-email"
+            type="text"
+            value={ email }
+            name="email"
+            onChange={ this.handleChange }
+          />
+          <p className="edit-inputs">Editar descrição do perfil:</p>
+          <input
+            data-testid="edit-input-description"
+            type="text"
+            value={ description }
+            name="description"
+            onChange={ this.handleChange }
+          />
+          <p className="edit-inputs">Adicionar uma imagem ao perfil:</p>
+          <input
+            data-testid="edit-input-image"
+            type="text"
+            value={ image }
+            name="image"
+            onChange={ this.handleChange }
+            placeholder="url da imagem"
+          />
+          <button
+            data-testid="edit-button-save"
+            type="button"
+            disabled={ this.enableButton() }
+            onClick={ this.handleClick }
+            className="edit-profile-btn"
+          >
+            {' '}
+            Salvar
+            {' '}
+          </button>
+        </div>
+      </div>
     );
   }
 
