@@ -1,5 +1,5 @@
 const USER_KEY = 'user';
-const TIMEOUT = 0;
+const TIMEOUT = 1000;
 const SUCCESS_STATUS = 'OK';
 
 const readUser = () => JSON.parse(localStorage.getItem(USER_KEY));
